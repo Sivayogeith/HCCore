@@ -102,8 +102,8 @@ public class SlackBot implements Listener {
           .usersProfileGet(r -> r.token(ctx.getBotToken()).user(userId));
       String displayName = result.getProfile().getDisplayName();
 
-      TextComponent nameComponent = Component.text(displayName.length() > 15
-          ? displayName.substring(0, 15) + "..."
+      TextComponent nameComponent = Component.text(displayName.length() > PlayerData.MAX_NICKNAME_LENGTH
+          ? displayName.substring(0, PlayerData.MAX_NICKNAME_LENGTH) + "..."
           : displayName).color(NamedTextColor.WHITE)
           .hoverEvent(Component.text(result.getProfile().getRealName()));
 
