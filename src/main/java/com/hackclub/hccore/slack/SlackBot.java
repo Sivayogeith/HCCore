@@ -102,7 +102,9 @@ public class SlackBot implements Listener {
           .usersProfileGet(r -> r.token(ctx.getBotToken()).user(userId));
       String displayName = result.getProfile().getDisplayName();
 
-      TextComponent nameComponent = Component.text(displayName).color(NamedTextColor.WHITE)
+      TextComponent nameComponent = Component.text(displayName.length() > 15
+          ? displayName.substring(0, 15) + "..."
+          : displayName).color(NamedTextColor.WHITE)
           .hoverEvent(Component.text(result.getProfile().getRealName()));
 
       plugin.getServer().broadcast(SlackChatMessage.get(nameComponent, text));
